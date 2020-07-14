@@ -1,4 +1,8 @@
 //instancia de los demas archivos, para poder usarlos en toda la aplicacion:
+//instancio la api:
+const api = new Api(
+  "1010fd0f42f02ee30c384d575fda0098cb5e352c16b4e09a77cafac74c14b31e"
+);
 //instancia de la interfaz(ui):
 const ui = new Interfaz();
 
@@ -29,6 +33,15 @@ form.addEventListener("submit", (e) => {
     );
   } else {
     //todo bien, consulto a la api:
-    ui.mostrarMensaje("Todo Correcto", "text-center alert bg-success");
+
+    //entonces aqui. primero voy a crear un metodo en api.js, para consultar la api
+    //ya tengo el metodo, entonces hago:
+    api.obtenerValores(monedaSeleccionada, criptoSeleccionada).then((data) => {
+      ui.mostrarResultado(
+        data.resultado.RAW,
+        monedaSeleccionada,
+        criptoSeleccionada
+      );
+    });
   }
 });
